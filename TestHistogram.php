@@ -45,10 +45,30 @@ class TestHistogram extends PHPUnit_Framework_TestCase
 		$histogram->values = array(1=>3);
 		$this->assertEquals(array(1=>3), $histogram->getValues());
     }
-    public function testOrder()
+    public function testOrderRegular()
     {
+		$histogram = new Histogram(2,2,1,3,3,3);
+		$histogram->order();
 
+		$expected = array(3=>3,2=>2,1=>1);
+		foreach ($histogram->getValues() as $index=>$value) {
+			$this->assertEquals(key($expected), $index);			
+			$this->assertEquals(current($expected), $value);
+			next($expected);
+		}
     }
+	public function testOrderInverse()
+	{
+		$histogram = new Histogram(2,2,1,3,3,3);
+		$histogram->order(true);
+
+		$expected = array(1=>1,2=>2,3=>3);
+		foreach ($histogram->getValues() as $index=>$value) {
+			$this->assertEquals(key($expected), $index);			
+			$this->assertEquals(current($expected), $value);
+			next($expected);
+		}
+	}
 }
 
 class Mock_Histogram extends Histogram

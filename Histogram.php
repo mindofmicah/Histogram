@@ -34,6 +34,10 @@ class Histogram
 	}
 	public function order($inverse = 0)
 	{
-
+		if ($inverse) {
+			asort($this->values);
+		} else {
+			arsort($this->values);
+		}
 	}
 }
