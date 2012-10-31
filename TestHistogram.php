@@ -52,7 +52,7 @@ class TestHistogram extends PHPUnit_Framework_TestCase
 			array('key'=>4)
 		);
 		$histogram = Histogram::buildFromArray($input, 'invalid key');
-		$this->assertEquals(array(), $histogram->getValues()));
+		$this->assertEquals(array(), $histogram->getValues());
     }
 
     public function testBuildFromObjects()
