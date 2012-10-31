@@ -31,7 +31,7 @@ class TestHistogram extends PHPUnit_Framework_TestCase
 	{
 		$input = array(3,4,5,6,7,3);
 
-		$histogram = Histogram::buildFromArray($input, 'key');
+		$histogram = Histogram::buildFromArray($input);
 		$this->assertInstanceOf('Histogram', $histogram);
 		$this->assertEquals(array(3=>2, 4=>1, 5=>1, 6=>1, 7=>1), $histogram->getValues());
 
