@@ -21,14 +21,15 @@ class Histogram
 	public function buildFromArray(array $ary = array(), $key = null)
 	{
 		$histogram = new Histogram();
-		foreach ($ary as $a) {
-			if ($key) {
+
+		if ($key) {
+			foreach ($ary as $a) {
 				if (array_key_exists($key, $a)) {
 					$histogram->addValue($a[$key]);
 				}				
-			} else {
-				$histogram->addValue($a);
 			}
+		} else {
+			array_walk($ary, array($histogram,'addValue'));
 		}
 
 		return $histogram;
