@@ -34,8 +34,24 @@ class TestHistogram extends PHPUnit_Framework_TestCase
 
     public function testBuildFromObjects()
     {
+		$object1 = new stdClass();
+		$object1->val = 2;
+		$object2 = new stdClass();
+		$object2->val = 1;
 
+		$objects = array($object1, $object2);
+
+		$histogram = Histogram::buildFromObjects($objects, 'val');
+		$this->assertInstanceOf('Histogram', $histogram);
+		$this->assertEquals(array(1=>1,2=>1), $histogram->getValues());
     }
+
+	public function testBuildFromObjectsInvalidKey()
+	{
+		$objects = array(new stdClass);		
+		$histogram = Histogram::buildFromObjects($objects, 'some property that does not exist');
+		$this->assertEquals(array(), $histogram->getValues());
+	}
 
     public function testGetValues()
     {

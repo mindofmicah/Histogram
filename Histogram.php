@@ -25,7 +25,13 @@ class Histogram
 
 	public function buildFromObjects(array $ary = array(), $property)
 	{
-
+		$histogram = new Histogram();
+		foreach ($ary as $obj) {
+			if (property_exists($obj, $property)) {
+				$histogram->addValue($obj->$property);
+			}
+		}
+		return $histogram;
 	}
 
 	public function getValues()
