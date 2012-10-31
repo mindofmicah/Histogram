@@ -20,7 +20,18 @@ class Histogram
 	
 	public function buildFromArray(array $ary = array(), $key = null)
 	{
+		$histogram = new Histogram();
+		foreach ($ary as $a) {
+			if ($key) {
+				if (array_key_exists($key, $a)) {
+					$histogram->addValue($a[$key]);
+				}				
+			} else {
+				$histogram->addValue($a);
+			}
+		}
 
+		return $histogram;
 	}
 
 	public function buildFromObjects(array $ary = array(), $property)
